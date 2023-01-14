@@ -258,7 +258,7 @@ export class ThreeShader2Channels {
     startScene() {
 
         let canvas = this.canvas;
-        this.renderer = new THREE.WebGLRenderer({canvas, alpha: true, antialias: false});
+        this.renderer = new THREE.WebGLRenderer({canvas, alpha: true, antialias: true});
         this.renderer.setClearColor("#000000");
         this.renderer.setPixelRatio(1.0);
         console.log(`window.devicePixelRatio = ${window.devicePixelRatio}`);
