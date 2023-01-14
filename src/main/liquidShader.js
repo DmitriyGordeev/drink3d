@@ -42,7 +42,7 @@ export function getLiquidShader() {
             int rotations = 1;
             vec2 n = vec2(floor(rPx * cos(angle)), floor(rPx * sin(angle)));
             while (angle <= 1.2 * PI) {
-                n = 8.0 * vec2(floor(rPx * cos(angle)), floor(rPx * sin(angle)));
+                n = 5.0 * vec2(floor(rPx * cos(angle)), floor(rPx * sin(angle)));
 
                 vec2 pos = (pxCoords + n * vec2(-0.5, -3.0)) / u_screenSize.xy;
                 vec4 color = texture(u_texture, pos);
