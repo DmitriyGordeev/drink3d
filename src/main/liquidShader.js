@@ -41,10 +41,10 @@ export function getLiquidShader() {
             float outValue = 0.0;
             int rotations = 1;
             vec2 n = vec2(floor(rPx * cos(angle)), floor(rPx * sin(angle)));
-            while (angle <= 2.0 * PI) {
+            while (angle <= 1.2 * PI) {
                 n = 8.0 * vec2(floor(rPx * cos(angle)), floor(rPx * sin(angle)));
 
-                vec2 pos = (pxCoords + n * vec2(-0.4, 4.0)) / u_screenSize.xy;
+                vec2 pos = (pxCoords + n * vec2(-0.5, 3.0)) / u_screenSize.xy;
                 vec4 color = texture(u_texture, pos);
 
                 // use this if liquid is light color
@@ -70,11 +70,11 @@ export function getLiquidShader() {
             vec2 n = vec2(floor(rPx * cos(angle)), floor(rPx * sin(angle)));
             int rotations = 1;
             float rotation = 1.0;
-            while (angle <= 2.0 * PI) {
+            while (angle <= 1.6 * PI) {
                 rotation += getRotation(gl_FragCoord.xy + n);
                 angle += getRandAngle(gl_FragCoord.xy + n);
 
-                float factor = 1.0;
+                float factor = 0.2;
                 // TODO: factor should change from 1.0 to 3.0 with time ?
 
                 n += factor * rotation * vec2(floor(rPx * cos(angle)), floor(rPx * sin(angle)));
