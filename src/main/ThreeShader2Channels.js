@@ -49,8 +49,9 @@ export class ThreeShader2Channels {
         this.actors = [];
         this.bottleState = BottleState.CLOSE;
 
-        this.renderTarget1 = new THREE.WebGLRenderTarget(this.cw, this.ch);
-        this.renderTarget2 = new THREE.WebGLRenderTarget(this.cw, this.ch);
+        let divFactor = 1.0;
+        this.renderTarget1 = new THREE.WebGLRenderTarget(this.cw / divFactor, this.ch / divFactor);
+        this.renderTarget2 = new THREE.WebGLRenderTarget(this.cw / divFactor, this.ch / divFactor);
 
         /* mouse events  */
         // TODO: mouse events for mobile will be touch events

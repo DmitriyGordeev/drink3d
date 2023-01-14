@@ -21,7 +21,7 @@ export function getLiquidShader() {
         }
 
         float getRandAngle(vec2 pxCoords) {
-            return PI / 10.0 * rand(pxCoords) + PI / 3.0;
+            return PI / 3.0 * rand(pxCoords) + PI / 3.0;
         }
 
         bool drawBox(vec2 center, vec2 uv, float w, float h) {
@@ -44,7 +44,7 @@ export function getLiquidShader() {
             while (angle <= 1.2 * PI) {
                 n = 8.0 * vec2(floor(rPx * cos(angle)), floor(rPx * sin(angle)));
 
-                vec2 pos = (pxCoords + n * vec2(-0.5, 3.0)) / u_screenSize.xy;
+                vec2 pos = (pxCoords + n * vec2(-0.5, -3.0)) / u_screenSize.xy;
                 vec4 color = texture(u_texture, pos);
 
                 // use this if liquid is light color
@@ -74,7 +74,7 @@ export function getLiquidShader() {
                 rotation += getRotation(gl_FragCoord.xy + n);
                 angle += getRandAngle(gl_FragCoord.xy + n);
 
-                float factor = 0.2;
+                float factor = 0.1;
                 // TODO: factor should change from 1.0 to 3.0 with time ?
 
                 n += factor * rotation * vec2(floor(rPx * cos(angle)), floor(rPx * sin(angle)));
@@ -82,7 +82,7 @@ export function getLiquidShader() {
             }
             n = n / float(rotations);
             float finalAngle = getRandAngle(gl_FragCoord.xy + n);
-            vec2 offset = vec2(-0.3, -1.0);
+            vec2 offset = vec2(-0.5, 1.0);
 
             vec2 pos = (gl_FragCoord.xy + n * offset) / u_screenSize.xy;
             vec4 texel = texture(u_texture, fract(pos));
