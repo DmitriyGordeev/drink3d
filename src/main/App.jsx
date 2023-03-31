@@ -6,10 +6,6 @@ import './contact.css';
 import './about.css';
 import './loading.css';
 
-import {CustomAnim2D} from "./CustomAnim2D";
-import {PureWebGl} from "./PureWebGl";
-import {ThreeExample} from './ThreeExample';
-import {ThreeShadersExample} from './ThreeShadersExample';
 import {ThreeShader2Channels} from './ThreeShader2Channels';
 
 
@@ -30,19 +26,13 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+
+        // once component mounted, we load 3D scene
         this.anim = new ThreeShader2Channels();
         this.anim.setComponentRef(this);
         this.anim.entry();
 
-        // this.anim = new ThreeShadersExample();
-        // this.anim.entry();
-
-        // this.anim = new ThreeExample();
-        // this.anim.draw();
-
-        // this.anim = new PureWebGl();
-        // this.anim.draw();
-
+        // add mouse/touch listeners
         addEventListener('mousedown', (event) => {
             this.mouseDownHandler(event, this)
         });

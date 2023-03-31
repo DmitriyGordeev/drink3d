@@ -1,9 +1,7 @@
 import * as THREE from 'three';
 import {DragControls} from 'three/addons/controls/DragControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {getFragmentShader} from "./fluid2Dshader";
 import {getLiquidShader} from "./liquidShader";
-import {OrbitControls} from "three/addons/controls/OrbitControls";
 
 /**
  * This is example of how to take previous frame as a texture and use it again:
@@ -482,12 +480,12 @@ export class ThreeShader2Channels {
         // assign the output of the first render to the second scene
         this.uniforms2.u_texture.value = this.renderTarget1.texture;
 
-
         // Now we render the second scene
         this.renderer.setRenderTarget(this.renderTarget2);
         this.renderer.render(this.scene2, this.camera);
 
         // and assign it's output to the first and third scenes
+        // this is needed to add post-processing on top of the rendered texture
         this.uniforms1.u_texture.value = this.renderTarget2.texture;
         this.uniforms3.u_texture.value = this.renderTarget2.texture;
 
@@ -508,10 +506,6 @@ export class ThreeShader2Channels {
             loader.load('bottle.gltf', function (gltf) {
                 let bottle = gltf.scene;
                 thisRef.bottleCapGroup.add(bottle);
-
-                // bottle.position.y = -5.0;
-                // bottle.position.z = -7.0;
-
                 thisRef.actors.push(bottle);
                 resolve();
             });
@@ -523,16 +517,13 @@ export class ThreeShader2Channels {
                 loader.load('cap.gltf', function (gltf) {
                     let cap = gltf.scene;
                     thisRef.bottleCapGroup.add(cap);
-
                     cap.position.y = 4.36;
-                    // cap.position.z = 7.0;
-
                     thisRef.actors.push(cap);
                     resolve();
                 });
             });
         }).then(() => {
-
+            // what happens after we loaded 'cap.gltf'
             thisRef.startScene();
 
             thisRef.createPlane1();
