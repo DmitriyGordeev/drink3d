@@ -76,9 +76,8 @@
 .rotate-tooltip {
     position: absolute;
     font-size: 14px;
-    bottom: 20px;
-    left: calc(26%);
-    
+    bottom: 23px;
+    left: calc(27%);
 }
 
 .main-text {
