@@ -213,15 +213,15 @@ class App extends React.Component {
                         <br/>
                         <p>You can write us for further information using email below</p>
                         <br/>
-                        <p className={"email"}>drinks@company.com</p>
+                        <p className={"email"}>drinks@company.com</p><br/><br/>
+                        <p style={{fontSize: 10}}>This page was made for demonstration purposes. Not a real product</p>
                     </div>
                 </div>
 
                 {/*<p className={"demo-tooltip"}*/}
                 {/*   style={{opacity: 1.0 - this.state.rotateTooltipHidden}}>*/}
-                {/*    This page was made for demonstration purposes. Not a real product*/}
+                {/*    */}
                 {/*</p>*/}
-
 
                 <div className={loadingScreenClass}>
                     <p>Loading...</p>
