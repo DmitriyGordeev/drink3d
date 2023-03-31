@@ -498,7 +498,7 @@ export class ThreeShader2Channels {
 
 
     entry() {
-        let thisref = this;
+        let thisRef = this;
         const loader = new GLTFLoader().setPath('models/');
 
         this.bottleCapGroup = new THREE.Object3D();
@@ -507,12 +507,12 @@ export class ThreeShader2Channels {
         let promise = new Promise((resolve, reject) => {
             loader.load('bottle.gltf', function (gltf) {
                 let bottle = gltf.scene;
-                thisref.bottleCapGroup.add(bottle);
+                thisRef.bottleCapGroup.add(bottle);
 
                 // bottle.position.y = -5.0;
                 // bottle.position.z = -7.0;
 
-                thisref.actors.push(bottle);
+                thisRef.actors.push(bottle);
                 resolve();
             });
         });
@@ -522,31 +522,31 @@ export class ThreeShader2Channels {
             return new Promise((resolve) => {
                 loader.load('cap.gltf', function (gltf) {
                     let cap = gltf.scene;
-                    thisref.bottleCapGroup.add(cap);
+                    thisRef.bottleCapGroup.add(cap);
 
                     cap.position.y = 4.36;
                     // cap.position.z = 7.0;
 
-                    thisref.actors.push(cap);
+                    thisRef.actors.push(cap);
                     resolve();
                 });
             });
         }).then(() => {
 
-            thisref.startScene();
+            thisRef.startScene();
 
-            thisref.createPlane1();
-            thisref.createPlane2();
-            thisref.createPlane3();
+            thisRef.createPlane1();
+            thisRef.createPlane2();
+            thisRef.createPlane3();
 
-            thisref.bottleCapGroup.position.set(0, -5, 7);
-            thisref.scene3.add(thisref.bottleCapGroup);
+            thisRef.bottleCapGroup.position.set(0, -5, 7);
+            thisRef.scene3.add(thisRef.bottleCapGroup);
 
-            thisref.animateScene(thisref.actors);
-            thisref.renderScene();
+            thisRef.animateScene(thisRef.actors);
+            thisRef.renderScene();
 
             // notify App component that we are ready to remove the loading screen
-            thisref.componentRef.onCanvasReady();
+            thisRef.componentRef.onCanvasReady();
         });
     }
 

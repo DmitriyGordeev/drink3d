@@ -11,30 +11,22 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@babel/core": "^7.18.0",
-    "@reduxjs/toolkit": "^1.8.6",
-    "jquery": "^3.6.0",
-    "lodash": "^4.17.21",
-    "package.json": "^0.0.0",
-    "react": "^16.8.3",
-    "react-chartjs-2": "^4.0.1",
-    "react-dom": "^17.0.2",
-    "react-redux": "^7.2.6",
-    "react-vis": "^0.3.4",
-    "redux": "^4.1.2",
-    "three": "^0.146.0"
+    "@babel/core": "*",
+    "@reduxjs/toolkit": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "three": "*",
+    "webpack-cli": "*",
+    "@babel/preset-env": "*",
+    "@babel/preset-react": "*"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.3",
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "^6.6.0",
-    "file-loader": "^6.2.0",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.69.1",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "babel-loader": "*",
+    "css-loader": "*",
+    "file-loader": "*",
+    "style-loader": "*",
+    "webpack": "*",
+    "webpack-dev-server": "*"
   }
 }
