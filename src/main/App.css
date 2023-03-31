@@ -75,9 +75,9 @@
 
 .rotate-tooltip {
     position: absolute;
-    font-size: 10px;
+    font-size: 14px;
     bottom: 20px;
-    left: calc(28% + 15px);
+    left: calc(26%);
     
 }
 
@@ -144,12 +144,18 @@
         width: fit-content;
         left: 0;
         right: 0;
-        bottom: 30px;
+        bottom: 17px;
         margin: 0 auto;
         display: block;
         font-size: 12px;
     }
 
+    .rotate-tooltip {
+        position: absolute;
+        font-size: 12px;
+        bottom: 10%;
+        left: calc(60%);
+    }
 
 }
 
@@ -172,9 +178,16 @@
         width: fit-content;
         left: 0;
         right: 0;
-        bottom: 30px;
+        bottom: 20px;
         margin: 0 auto;
         display: block;
-        font-size: 12px;
+        font-size: 16px;
+    }
+
+    .rotate-tooltip {
+        position: absolute;
+        font-size: 15px;
+        bottom: 10%;
+        left: calc(60%);
     }
 }

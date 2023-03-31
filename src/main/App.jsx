@@ -139,6 +139,10 @@ class App extends React.Component {
             aboutOpenLeft = '35%';
         }
 
+        let rotTooltip = "Rotate with mouse"
+        if (window.screen.width <= 900) {
+            rotTooltip = "Rotate with touch"
+        }
 
         return (
             <div onClick={() => {this.mainDivClickHandler()}}>
@@ -180,8 +184,8 @@ class App extends React.Component {
                     <div className={'animated-ball'}/>
                 </div>
 
-                {/*<p className={"rotate-tooltip"}*/}
-                {/*   style={{opacity: 1.0 - this.state.rotateTooltipHidden}}>Rotate with mouse</p>*/}
+                <p className={"rotate-tooltip"}
+                   style={{opacity: 1.0 - this.state.rotateTooltipHidden}}>{rotTooltip}</p>
 
 
                 {/* --------- Contact dialog --------- */}
