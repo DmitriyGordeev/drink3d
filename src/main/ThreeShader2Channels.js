@@ -144,14 +144,20 @@ export class ThreeShader2Channels {
 
 
     animateScene() {
+
+        // Create loop
         window.customRequestAnimationFrame(() => {
             this.animateScene(this.actors)
         });
 
+        // Update uniform values
         this.uniforms1.u_time.value = this.clock.getElapsedTime();
         this.uniforms2.u_time.value = this.clock.getElapsedTime();
         this.uniforms3.u_time.value = this.clock.getElapsedTime();
 
+        // --------------------------------------------------------------------------------
+        // 3d models moving logics
+        // TODO: make a sep function for this
         // Object animation when use mouse
         let cap = this.actors[1];
 
@@ -247,8 +253,8 @@ export class ThreeShader2Channels {
         }
 
 
-        this.uniforms1.u_cubeElevation.value = capElevation;
-        this.uniforms2.u_cubeElevation.value = capElevation;
+        this.uniforms1.u_capElevation.value = capElevation;
+        this.uniforms2.u_capElevation.value = capElevation;
 
         this.renderScene();
     }
@@ -260,8 +266,6 @@ export class ThreeShader2Channels {
         this.renderer = new THREE.WebGLRenderer({canvas, alpha: true, antialias: true});
         this.renderer.setClearColor("#000000");
         this.renderer.setPixelRatio(1.0);
-        console.log(`window.devicePixelRatio = ${window.devicePixelRatio}`);
-        // this.renderer.setSize(this.cw, this.ch);
 
         this.renderer.setSize(
             window.innerWidth,
@@ -269,14 +273,13 @@ export class ThreeShader2Channels {
 
         this.aspect = this.canvas.width / this.canvas.height;
 
+        this.camera = new THREE.PerspectiveCamera(40, this.aspect);
+        this.camera.position.set(0, 0, 11);
+        this.camera.lookAt(0, 0, 0);
+
         this.scene1 = new THREE.Scene();
         this.scene2 = new THREE.Scene();
         this.scene3 = new THREE.Scene();
-
-        this.camera = new THREE.PerspectiveCamera(40, this.aspect);
-
-        this.camera.position.set(0, 0, 11);
-        this.camera.lookAt(0, 0, 0);
 
         this.scene1.add(this.camera);
         this.scene2.add(this.camera);
@@ -284,19 +287,16 @@ export class ThreeShader2Channels {
 
         const light = new THREE.AmbientLight(0xffffff); // soft white light
         this.scene3.add(light);
-
         this.camera.updateProjectionMatrix();
     }
 
 
     createPlane1() {
-
         this.uniforms1 = {
             u_time: {type: 'f', value: 0.0},
             u_texture: {type: 't', value: this.renderTarget2.texture},
-            u_noise: {type: 't', value: this.noiseTexture},
             u_screenSize: {type: 'v2', value: new THREE.Vector2(this.cw, this.ch)},
-            u_cubeElevation: {type: 'f', value: 0.0}
+            u_capElevation: {type: 'f', value: 0.0}
         };
 
         let vertexShader = `
@@ -333,7 +333,6 @@ export class ThreeShader2Channels {
         this.plane1.rotation.y = 0.0;
         this.plane1.rotation.x = 0.0;
         this.scene1.add(this.plane1);
-        // this.actors.push(this.plane1);
     }
 
 
@@ -342,9 +341,8 @@ export class ThreeShader2Channels {
         this.uniforms2 = {
             u_time: {type: 'f', value: 0.0},
             u_texture: {type: 't', value: this.renderTarget1.texture},
-            u_noise: {type: 't', value: this.noiseTexture},
             u_screenSize: {type: 'v2', value: new THREE.Vector2(this.cw, this.ch)},
-            u_cubeElevation: {type: 'f', value: 0.0}
+            u_capElevation: {type: 'f', value: 0.0}
         };
 
         let vertexShader = `
@@ -383,7 +381,6 @@ export class ThreeShader2Channels {
         this.plane2.rotation.y = 0.0;
         this.plane2.rotation.x = 0.0;
         this.scene2.add(this.plane2);
-        // this.actors.push(this.plane2);
     }
 
 
@@ -446,30 +443,6 @@ export class ThreeShader2Channels {
         this.plane3.rotation.y = 0.0;
         this.plane3.rotation.x = 0.0;
         this.scene3.add(this.plane3);
-        // this.actors.push(this.plane3);
-    }
-
-
-    createCube() {
-        let cubeMaterials = [
-            new THREE.MeshBasicMaterial({color: 0x2173fd}),
-            new THREE.MeshBasicMaterial({color: 0xd5d918}),
-            new THREE.MeshBasicMaterial({color: 0xd2dbeb}),
-            new THREE.MeshBasicMaterial({color: 0xa3a3c6}),
-            new THREE.MeshBasicMaterial({color: 0x330000}),
-            new THREE.MeshBasicMaterial({color: 0x856af9})
-        ];
-
-        let cubeGeometry = new THREE.BoxGeometry(2, 2, 2);
-        this.cube = new THREE.Mesh(cubeGeometry, cubeMaterials);
-
-        this.cube.position.x = 0.0;
-        this.cube.position.y = -3.0;
-        this.cube.position.z = -3.0;
-        this.cube.rotation.y = Math.PI / 3.0;
-
-        // this.scene3.add(this.cube);
-        this.actors.push(this.cube);
     }
 
 

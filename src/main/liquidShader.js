@@ -3,8 +3,7 @@ export function getLiquidShader() {
         uniform vec2 u_screenSize;
         uniform float u_time;
         uniform sampler2D u_texture;    // this texture holds rendering from the previous frame
-        uniform sampler2D u_noise;      // this is noise texture reference
-        uniform float u_cubeElevation;
+        uniform float u_capElevation;
 
         varying vec3 vPos;
         varying vec2 vUV;
@@ -91,7 +90,7 @@ export function getLiquidShader() {
             gl_FragColor = finalColor;
 
             // Initial figure
-            if (u_cubeElevation < 4.4) {
+            if (u_capElevation < 4.4) {
                 // if (drawCircle(figureCenter, uv, 0.07)) {
                 if (uv.x >= 0.46 && uv.x <= 0.54 && uv.y >= 0.0 && uv.y <= 0.05) {
                     // gl_FragColor = vec4(94, 7, 26, 255) / 255.0;
