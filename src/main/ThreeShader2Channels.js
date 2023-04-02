@@ -210,7 +210,7 @@ export class ThreeShader2Channels {
                     thisref.bottleState = BottleState.PRESENTED;
 
                     bottle.position.set(0, 0, 0);
-                    cap.position.set(0, 4.36, 0);
+                    cap.position.set(0, 3.55, 0);
                     cap.rotation.z = 0.0;
 
                     // in case it's a mobile device we don't move the bottle too much left,
@@ -285,8 +285,15 @@ export class ThreeShader2Channels {
         this.scene2.add(this.camera);
         this.scene3.add(this.camera);
 
-        const light = new THREE.AmbientLight(0xffffff); // soft white light
-        this.scene3.add(light);
+        const ambientLight = new THREE.AmbientLight(0xffffff); // soft white light
+        this.scene3.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight( 0xffffff, 0.3);
+        dirLight.position.z = 2.0;
+        this.scene3.add(dirLight);
+
+
+
         this.camera.updateProjectionMatrix();
     }
 
@@ -462,7 +469,7 @@ export class ThreeShader2Channels {
         this.uniforms1.u_texture.value = this.renderTarget2.texture;
         this.uniforms3.u_texture.value = this.renderTarget2.texture;
 
-        // Finally render 3ed scene
+        // Finally render to the viewport (canvas)
         this.renderer.setRenderTarget(null);
         this.renderer.render(this.scene3, this.camera);
     }
@@ -476,8 +483,10 @@ export class ThreeShader2Channels {
 
         // Loading bottle.gltf model
         let promise = new Promise((resolve, reject) => {
-            loader.load('bottle.gltf', function (gltf) {
+            loader.load('bottle_5.gltf', function (gltf) {
                 let bottle = gltf.scene;
+                console.log(`bottle.position.z = ${bottle.position.z}`);
+                bottle.position.y = 0.72;
                 thisRef.bottleCapGroup.add(bottle);
                 thisRef.actors.push(bottle);
                 resolve();
@@ -487,16 +496,15 @@ export class ThreeShader2Channels {
         // loading cap -> then -> setup scene
         promise.then(() => {
             return new Promise((resolve) => {
-                loader.load('cap.gltf', function (gltf) {
+                loader.load('cap_5.gltf', function (gltf) {
                     let cap = gltf.scene;
                     thisRef.bottleCapGroup.add(cap);
-                    cap.position.y = 4.36;
                     thisRef.actors.push(cap);
                     resolve();
                 });
             });
         }).then(() => {
-            // what happens after we loaded 'cap.gltf'
+            // what happens after 'cap.gltf loaded'
             thisRef.startScene();
 
             thisRef.createPlane1();
